@@ -1,0 +1,47 @@
+# Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# Environment variables (NEVER commit secrets)
+.env
+api/.env
+frontend/.env
+
+# Build outputs
+dist/
+build/
+frontend/dist/
+api/dist/
+
+# Rust / Cargo - ALL target directories
+target/
+**/target/
+**/fresh-target*/
+**/target-test/
+
+# Temp files (generated at runtime by API)
+api/temp/
+api/sponsored.json
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDE / Editor
+.vscode/
+.idea/
+*.suo
+*.user
+*.userosscache
+*.sln.docview
+
+# Logs
+*.log
+logs/
+
+# TypeScript build info
+*.tsbuildinfo
