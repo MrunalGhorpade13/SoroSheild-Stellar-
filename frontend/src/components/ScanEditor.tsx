@@ -76,7 +76,7 @@ export const ScanEditor: React.FC<ScanEditorProps> = ({ onScan, loading }) => {
           <button
             onClick={handleScanClick}
             disabled={loading}
-            className="inline-flex items-center gap-1.5 bg-stellar-blue text-white px-4.5 py-1.5 rounded-lg text-xs font-bold transition-all shadow-sm hover:bg-stellar-darkBlue active:scale-95 disabled:opacity-50"
+            className="inline-flex items-center gap-1.5 bg-stellar-blue text-white px-4.5 py-1.5 rounded-lg text-xs font-bold transition-all shadow-sm hover:bg-stellar-dark-blue active:scale-95 disabled:opacity-50"
           >
             <Play className="w-3.5 h-3.5 fill-current" />
             <span>{loading ? 'Analyzing...' : 'Scan Contract'}</span>
