@@ -5,7 +5,7 @@ use std::path::Path;
 use serde_json::json;
 
 mod parser;
-use parser::{SorobanScanner, Finding, Severity};
+use parser::{SorobanScanner, Finding};
 use syn::visit::Visit;
 
 fn main() -> anyhow::Result<()> {
