@@ -198,6 +198,10 @@ app.get('/api/status', (req: Request, res: Response) => {
   });
 });
 
-app.listen(PORT, () => {
-  console.log(`SoroShield API Server is running on http://localhost:${PORT}`);
-});
+if (process.env.NODE_ENV !== 'test') {
+  app.listen(PORT, () => {
+    console.log(`SoroShield API Server is running on http://localhost:${PORT}`);
+  });
+}
+
+export default app;
