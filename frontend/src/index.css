@@ -36,3 +36,28 @@ body {
 h1, h2, h3, h4, h5, h6 {
   @apply font-display font-bold tracking-tight text-slate-900;
 }
+
+/* Custom premium hover and glow animations */
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-5px); }
+  100% { transform: translateY(0px); }
+}
+
+@keyframes pulseGlow {
+  0%, 100% { box-shadow: 0 0 5px rgba(74, 144, 226, 0.2); }
+  50% { box-shadow: 0 0 20px rgba(74, 144, 226, 0.6); }
+}
+
+@utility animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+@utility animate-glow {
+  animation: pulseGlow 2s infinite alternate;
+}
+
+@utility card-hover {
+  @apply transition-all duration-300 hover:scale-[1.01] hover:shadow-xl hover:border-stellar-blue/50;
+}
+
