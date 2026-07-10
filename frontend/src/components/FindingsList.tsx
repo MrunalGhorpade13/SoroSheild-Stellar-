@@ -148,7 +148,7 @@ export const FindingsList: React.FC<FindingsListProps> = ({
 
           <button
             onClick={onMintClick}
-            className="ml-2 bg-stellar-blue text-white font-bold text-xs px-3.5 py-1.5 rounded-lg hover:bg-stellar-darkBlue transition-all shrink-0 active:scale-95 shadow-sm"
+            className="ml-2 bg-stellar-blue text-white font-bold text-xs px-3.5 py-1.5 rounded-lg hover:bg-stellar-dark-blue transition-all shrink-0 active:scale-95 shadow-sm"
           >
             Mint Certificate
           </button>
