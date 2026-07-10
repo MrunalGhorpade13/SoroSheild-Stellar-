@@ -164,7 +164,7 @@ export const FindingsList: React.FC<FindingsListProps> = ({
           return (
             <div
               key={index}
-              className={`border border-slate-100 rounded-xl overflow-hidden transition-all shadow-sm ${styles.bg}`}
+              className={`border border-slate-100 rounded-xl overflow-hidden shadow-sm card-hover ${styles.bg}`}
             >
               {/* Accordion header */}
               <button
