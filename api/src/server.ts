@@ -142,15 +142,18 @@ app.post('/api/feebump', async (req: Request, res: Response): Promise<void> => {
       return;
     }
 
-    // Build fee bump transaction
+    // Build the outer Fee Bump transaction envelope.
+    // The inner transaction is signed by the developer (user), while the outer fee-bump
+    // is signed by the sponsor wallet. The network passphrase determines if this is Testnet or Mainnet.
     const feeBumpTx = TransactionBuilder.buildFeeBumpTransaction(
       sponsorKeypair.publicKey(),
-      '1000000', // max fee in stroops (1 XLM)
+      '1000000', // Max fee in stroops (1.0 XLM cap to prevent excessive consumption)
       innerTx,
       networkPassphrase
     );
 
-    // Sign with sponsor key
+    // Sign the outer wrapper transaction with the sponsor key pair secret.
+    // After signing, the transaction contains the signature from both the user and the sponsor.
     feeBumpTx.sign(sponsorKeypair);
 
     // Submit transaction via Horizon
