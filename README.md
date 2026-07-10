@@ -128,3 +128,17 @@ npm run dev
 ### 4. Verify in Public Directory
 * Paste the contract code hash in the **On-Chain Registry** lookup page or check the **Public Scan Feed** table at the bottom of the page to inspect recently issued certificates.
 * The directory pulls details directly from the Stellar Testnet ledger!
+
+---
+
+## 👥 User Onboarding & Feedback
+To continuously improve SoroShield, we are collecting feedback from early adopters:
+* **Google Feedback Form**: [Submit Feedback here](PLACEHOLDER_GOOGLE_FORM_URL)
+* **Exported User Responses**: [user_responses.xlsx](PLACEHOLDER_EXCEL_SHEET_URL)
+
+### 📈 Future Improvements & Next Phase Evolution
+Based on early feedback, here is our roadmap for the next development phase:
+1. **Dynamic AST Visualizer**: Render a syntax tree path in the console to help developers trace down exactly where warnings are generated. Commit link: [git commit link](PLACEHOLDER_GIT_COMMIT_LINK_1)
+2. **Stellar Asset Contract Integration**: Automate vulnerability checks for interactions with native SAC tokens. Commit link: [git commit link](PLACEHOLDER_GIT_COMMIT_LINK_2)
+3. **Audit History Tracking**: Add search history caching to compare scan hashes over time. Commit link: [git commit link](PLACEHOLDER_GIT_COMMIT_LINK_3)
+
