@@ -431,3 +431,45 @@ impl<'a> SorobanScanner<'a> {
         }
     }
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use syn::visit::Visit;
+
+    #[test]
+    fn test_scan_secrets_public_key() {
+        let code = "let address = \"GAU2K5F4X7F72LTSCFWBG6DEXKX3M6KCGFGPHVAH2ASDHN4OGUMM77JY\";";
+        let mut scanner = SorobanScanner::new(code);
+        scanner.scan_secrets(code);
+        assert!(!scanner.findings.is_empty());
+        assert_eq!(scanner.findings[0].rule_id, "RULE-08");
+        assert!(scanner.findings[0].title.contains("Stellar public address"));
+    }
+
+    #[test]
+    fn test_scan_secrets_secret_key() {
+        let code = "let secret = \"SAU2K5F4X7F72LTSCFWBG6DEXKX3M6KCGFGPHVAH2ASDHN4OGUMM77J5\";";
+        let mut scanner = SorobanScanner::new(code);
+        scanner.scan_secrets(code);
+        assert!(!scanner.findings.is_empty());
+        assert_eq!(scanner.findings[0].rule_id, "RULE-08");
+        assert!(scanner.findings[0].title.contains("secret key"));
+    }
+
+    #[test]
+    fn test_visit_unchecked_math() {
+        let code = "
+            pub fn add(env: Env, a: i32, b: i32) -> i32 {
+                a + b
+            }
+        ";
+        let file = syn::parse_str::<syn::File>(code).unwrap();
+        let mut scanner = SorobanScanner::new(code);
+        scanner.visit_file(&file);
+        assert!(!scanner.findings.is_empty());
+        assert_eq!(scanner.findings[0].rule_id, "RULE-02");
+        assert!(scanner.findings[0].title.contains("Unchecked Arithmetic"));
+    }
+}
+
