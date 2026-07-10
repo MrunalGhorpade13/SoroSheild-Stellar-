@@ -36,12 +36,12 @@ cargo build --target wasm32-unknown-unknown --release
 
 echo ""
 echo "[2/4] Optimizing WASM binary..."
-stellar contract optimize --wasm target/wasm32-unknown-unknown/release/soroshield.wasm
+stellar contract optimize --wasm ../../target/wasm32-unknown-unknown/release/soroshield_contract.wasm
 
 echo ""
 echo "[3/4] Deploying contract to Stellar Mainnet..."
 CONTRACT_ID=$(stellar contract deploy \
-  --wasm target/wasm32-unknown-unknown/release/soroshield.optimized.wasm \
+  --wasm ../../target/wasm32-unknown-unknown/release/soroshield_contract.optimized.wasm \
   --source "$DEPLOYER_SOURCE" \
   --network public)
 
