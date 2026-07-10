@@ -144,6 +144,7 @@ SoroShield scans for 10 core Soroban vulnerability classes:
 | 📝 User Onboarding Guide | ✅ Done | See [`docs/user_guide.md`](./docs/user_guide.md) |
 | 📐 Technical Docs | ✅ Done | See [`docs/technical_blog.md`](./docs/technical_blog.md) |
 | 🌐 Community Post | ✅ Done | Announcing SoroShield launch thread in [`docs/marketing_drafts.md`](./docs/marketing_drafts.md) |
+| 🏗️ Security Review | ✅ Done | See [`docs/SECURITY_CHECKLIST.md`](./docs/SECURITY_CHECKLIST.md) |
 | 👥 Verified Users | ⏳ Pending | Awaiting 20+ Mainnet user onboarding feedback logs |
 
 ---
@@ -155,4 +156,5 @@ SoroShield scans for 10 core Soroban vulnerability classes:
 | 📖 **User Guide** | Walkthrough console login, scanning, and minting workflows | [Read Guide →](./docs/user_guide.md) |
 | 📐 **Technical Architecture** | In-depth breakdown of Syn AST visitor patterns and fee-bump layout | [Read Tech Post →](./docs/technical_blog.md) |
 | 🐦 **Outreach Threads** | Product launch announcement copy for LinkedIn/Twitter | [Read Marketing Drafts →](./docs/marketing_drafts.md) |
+| 🛡️ **Security Review** | Detailed audit checklist and security vectors of the registry contract | [Read Review →](./docs/SECURITY_CHECKLIST.md) |
 | 🧪 **Task Tracking** | Level 6 checklists and progress trackers | [Read TODO.md →](./TODO.md) |
