@@ -29,4 +29,27 @@ describe('SoroShield Express API Server', () => {
       expect(response.body).toHaveProperty('sponsoredCount');
     });
   });
+
+  describe('POST /api/scan', () => {
+    it('should return 400 Bad Request when code parameter is missing', async () => {
+      const response = await request(app)
+        .post('/api/scan')
+        .send({});
+      
+      expect(response.status).toBe(400);
+      expect(response.body).toHaveProperty('success', false);
+      expect(response.body).toHaveProperty('error', 'Code is required as a string.');
+    });
+
+    it('should return 400 Bad Request when code is not a string', async () => {
+      const response = await request(app)
+        .post('/api/scan')
+        .send({ code: 12345 });
+      
+      expect(response.status).toBe(400);
+      expect(response.body).toHaveProperty('success', false);
+      expect(response.body).toHaveProperty('error', 'Code is required as a string.');
+    });
+  });
 });
+
