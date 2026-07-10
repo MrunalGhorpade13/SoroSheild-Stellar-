@@ -283,7 +283,7 @@ export const CertificateModal: React.FC<CertificateModalProps> = ({
                 </button>
                 <button
                   onClick={onClose}
-                  className="bg-stellar-blue text-white font-bold text-xs py-2.5 rounded-xl hover:bg-stellar-darkBlue transition-all shadow-sm flex items-center justify-center gap-1"
+                  className="bg-stellar-blue text-white font-bold text-xs py-2.5 rounded-xl hover:bg-stellar-dark-blue transition-all shadow-sm flex items-center justify-center gap-1"
                 >
                   <span>Close Window</span>
                   <ArrowRight className="w-3.5 h-3.5" />
@@ -306,7 +306,7 @@ export const CertificateModal: React.FC<CertificateModalProps> = ({
             <button
               onClick={handleMint}
               disabled={loading}
-              className="bg-stellar-blue text-white px-5 py-2 rounded-xl text-xs font-bold transition-all shadow-md hover:bg-stellar-darkBlue active:scale-95 disabled:opacity-50"
+              className="bg-stellar-blue text-white px-5 py-2 rounded-xl text-xs font-bold transition-all shadow-md hover:bg-stellar-dark-blue active:scale-95 disabled:opacity-50"
             >
               {loading ? 'Minting...' : 'Approve & Mint'}
             </button>
