@@ -476,5 +476,45 @@ mod tests {
         assert_eq!(scanner.findings[0].rule_id, "RULE-02");
         assert!(scanner.findings[0].title.contains("Unchecked arithmetic"));
     }
+
+    #[test]
+    fn test_visit_unprotected_upgrade() {
+        let code = "
+            struct Contract;
+            #[contractimpl]
+            impl Contract {
+                pub fn upgrade(env: Env, new_wasm: Bytes) {
+                    env.update_current_contract_wasm(&new_wasm);
+                }
+            }
+        ";
+        let file = syn::parse_str::<syn::File>(code).unwrap();
+        let mut scanner = SorobanScanner::new(code);
+        scanner.visit_file(&file);
+        assert!(!scanner.findings.is_empty());
+        assert_eq!(scanner.findings[0].rule_id, "RULE-05");
+        assert!(scanner.findings[0].title.contains("Unprotected contract upgrade"));
+    }
+
+    #[test]
+    fn test_visit_panic() {
+        let code = "
+            struct Contract;
+            #[contractimpl]
+            impl Contract {
+                pub fn check(env: Env, val: u32) {
+                    if val == 0 {
+                        panic!(\"invalid val\");
+                    }
+                }
+            }
+        ";
+        let file = syn::parse_str::<syn::File>(code).unwrap();
+        let mut scanner = SorobanScanner::new(code);
+        scanner.visit_file(&file);
+        assert!(!scanner.findings.is_empty());
+        assert_eq!(scanner.findings[0].rule_id, "RULE-07");
+        assert!(scanner.findings[0].title.contains("panic/unwrap/expect"));
+    }
 }
 
