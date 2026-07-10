@@ -460,8 +460,13 @@ mod tests {
     #[test]
     fn test_visit_unchecked_math() {
         let code = "
-            pub fn add(env: Env, a: i32, b: i32) -> i32 {
-                a + b
+            struct Contract;
+            
+            #[contractimpl]
+            impl Contract {
+                pub fn add(env: Env, a: i32, b: i32) -> i32 {
+                    a + b
+                }
             }
         ";
         let file = syn::parse_str::<syn::File>(code).unwrap();
@@ -469,7 +474,7 @@ mod tests {
         scanner.visit_file(&file);
         assert!(!scanner.findings.is_empty());
         assert_eq!(scanner.findings[0].rule_id, "RULE-02");
-        assert!(scanner.findings[0].title.contains("Unchecked Arithmetic"));
+        assert!(scanner.findings[0].title.contains("Unchecked arithmetic"));
     }
 }
 
