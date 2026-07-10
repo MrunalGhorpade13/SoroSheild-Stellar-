@@ -20,12 +20,12 @@ cargo build --target wasm32-unknown-unknown --release
 
 Write-Host ""
 Write-Host "[2/4] Optimizing WASM binary..." -ForegroundColor Cyan
-stellar contract optimize --wasm target/wasm32-unknown-unknown/release/soroshield.wasm
+stellar contract optimize --wasm target/wasm32-unknown-unknown/release/soroshield_contract.wasm
 
 Write-Host ""
 Write-Host "[3/4] Deploying contract to Stellar Testnet..." -ForegroundColor Cyan
 $CONTRACT_ID = stellar contract deploy `
-  --wasm target/wasm32-unknown-unknown/release/soroshield.optimized.wasm `
+  --wasm target/wasm32-unknown-unknown/release/soroshield_contract.optimized.wasm `
   --source $DEPLOYER_SOURCE `
   --network testnet
 
