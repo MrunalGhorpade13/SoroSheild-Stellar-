@@ -1,144 +1,158 @@
-# SoroShield: Soroban Smart Contract Security Scanner & On-Chain Audit Certifier
+# 🛡️ SoroShield — Soroban Smart Contract Security Scanner & On-Chain Certifier
 
-SoroShield is a smart contract security suite for the Stellar Soroban network. It combines a static analysis parser, an Express fee-sponsorship backend, and a React console interface to help developers identify vulnerabilities in Rust contracts and publish verifiable audit certificates stamped directly on the Stellar blockchain.
+> **An automated static analysis security scanner and on-chain audit certifier that parses Rust contract integrity and stamps immutable certificates directly to the blockchain — built on Stellar & Soroban.**
 
----
-
-## 💻 Technical Architecture & Workflow
-
-Here is how the components of SoroShield work together:
-
-```
-Developer (Browser)           React Frontend           Express API           Rust Scanner CLI          Stellar Testnet
-         │                           │                      │                       │                          │
-         │─── 1. Pastes Rust code ──>│                      │                       │                          │
-         │    & clicks "Scan"        │                      │                       │                          │
-         │                           │── 2. Computes Hash ─>│                       │                          │
-         │                           │                      │                       │                          │
-         │                           │── 3. POST /scan ────>│                       │                          │
-         │                           │                      │── 4. Writes file ────>│                          │
-         │                           │                      │── 5. Runs scanner ───>│                          │
-         │                           │                      │                       │── 6. Parses AST ────────>│
-         │                           │                      │                       │   (syn visitor patterns) │
-         │                           │                      │<── 7. JSON findings ──│                          │
-         │                           │<── 8. JSON findings ─│                       │                          │
-         │                           │                      │                       │                          │
-         │<── 9. Renders findings ───│                      │                       │                          │
-         │                           │                      │                       │                          │
-         │── 10. Click Mint & ──────>│                      │                       │                          │
-         │    connect Freighter      │── 11. Simulate ────────────────────────────────────────────────────────>│
-         │                           │<── 12. Gas Footprint ───────────────────────────────────────────────────│
-         │                           │                      │                       │                          │
-         │                           │── 13. Build Envelope ─>                      │                          │
-         │                           │   with resources     │                       │                          │
-         │<── 14. Requests Sign ─────│                      │                       │                          │
-         │─── 15. Approves ─────────>│                       │                       │                          │
-         │                           │── 16. POST /feebump ─>                       │                          │
-         │                           │   (if eligible)      │── 17. Wraps fee-bump ───────────────────────────>│
-         │                           │                      │   with sponsor key    │                          │
-         │                           │                      │                       │                          │
-         │                           │<── 18. Mint Event ───│──────────────────────────────────────────────────│
-         │                           │   & registers hash   │                       │                          │
-```
-
-1. **Static Analysis Crate (`/scanner`)**: Uses Rust's Abstract Syntax Tree (AST) parsing (`syn` and `proc-macro2` crates) to run visitor patterns over Rust contract source files. It checks for 10 common security rules (including unauthorized operations, unchecked math, unbounded growth, and checks-effects-interactions).
-2. **Express API Server (`/api`)**: Writes source code files to disk, executes the compiled scanner CLI, and acts as a **fee-bump sponsor** using the `@stellar/stellar-sdk` library to cover transaction fees for first-time developers.
-3. **Soroban Smart Contract (`/contracts/soroshield`)**: Deployed on Stellar Testnet, this contract manages certificate state. It charges a `0.5 XLM` scan fee, registers audited code hashes, maps them to submitters/issue logs, and publishes ledger tracking events.
-4. **React Console (`/frontend`)**: A sidebar-navigated, premium developer console utilizing Freighter Wallet for Web3 connectivity and a Monaco Workspace.
+[![Frontend Build](https://img.shields.io/badge/Console-Vite%20React%2019-blue?logo=react&logoColor=white)](http://localhost:5173/)
+[![API Backend](https://img.shields.io/badge/Backend-Express%20TS-lightgrey?logo=express&logoColor=white)](http://localhost:3001)
+[![Stellar Network](https://img.shields.io/badge/Network-Stellar%20Testnet-blueviolet?logo=stellar&logoColor=white)](https://stellar.expert/explorer/testnet)
+[![Level 6](https://img.shields.io/badge/Level_6-Black_Belt-111111?style=flat-square)](./TODO.md)
+[![License](https://img.shields.io/badge/License-MIT-green)](./LICENSE)
 
 ---
 
-## 🛠️ Project Structure
+## 🌟 Bridging the Security Gap
 
-```
-SoroShield-Stellar/
-├── scanner/               # Rust Static Analyzer Crate
-│   ├── src/               # AST parsing visitor patterns (main.rs, parser.rs)
-│   └── Cargo.toml         # Rust CLI parser configurations
-├── contracts/             # Soroban Smart Contract Crate
-│   └── soroshield/        # On-chain registry code (lib.rs)
-├── api/                   # Express Sponsorship Backend API
-│   ├── src/               # Express routes & SDK fee-bump signers (server.ts)
-│   └── package.json       # Express dependencies
-├── frontend/              # React Console Frontend
-│   ├── src/               # Wallet connectors, Monaco terminal, directories
-│   ├── package.json       # React, Vite, Tailwind CSS, Monaco editor
-│   └── postcss.config.js  # Tailwind CSS v4 processor configurations
-├── package.json           # Root monorepo workspace scripts
-└── README.md              # Project documentation
+As the Stellar network embraces general-purpose smart contracts via Soroban, ensuring contract safety is paramount. Bugs on-chain lead to lost funds, storage leaks, and protocol panics.
+
+**SoroShield** acts as a decentralized static analysis trust layer. It automatically reviews Rust smart contract code via visitor patterns inside an Abstract Syntax Tree (AST), identifies 10 critical vulnerability rules, and stamps a cryptographic audit certificate on the Stellar ledger — completely backed by gasless fee-bump transaction sponsorships.
+
+---
+
+## 💎 Core Pillars
+
+| 🔍 AST Visitor Parser | ⛽ Gasless Fee Sponsorship | ⛓️ On-Chain Registry |
+| :--- | :--- | :--- |
+| Traverses Rust syntax structures using `syn` and `proc-macro2` visitors to pinpoint unchecked math, authorization leaks, and unbounded collections. | New auditors need **zero XLM** to start stamping certificates. SoroShield's sponsor backend covers ledger fees via Fee-Bumps. | Code integrity hashes are stamped on-chain, mapping the auditor's address, ledger sequence, and exact security profile metadata. |
+
+---
+
+## 🔗 Project Links
+
+* **Local Dev Console**: [http://localhost:5173/](http://localhost:5173/)
+* **Demo Video**: [Watch Demo Video](PLACEHOLDER_DEMO_VIDEO_URL)
+* **Technical Blog Post**: [Read on Medium/Dev.to](./docs/technical_blog.md)
+* **Outreach Thread**: [LinkedIn/Twitter Launch thread](./docs/marketing_drafts.md)
+* **📋 User Feedback Form** *(Google Form)*: [Submit Feedback here](PLACEHOLDER_GOOGLE_FORM_URL)
+* **📊 Exported User Responses** *(Google Sheet / Excel)*: [user_responses.xlsx](PLACEHOLDER_EXCEL_SHEET_URL)
+
+---
+
+## ⚡ Advanced Feature — Fee Sponsorship (Gasless Transactions)
+
+SoroShield utilizes Stellar's native **Fee-Bump Transactions** to deliver gasless certificate minting.
+* Developers or auditors connect Freighter and request to sign the certification envelope.
+* SoroShield's Express API wraps the signed envelope into a Fee-Bump transaction signed by our treasury sponsor wallet.
+* Network fees are sponsored entirely by SoroShield's treasury wallet.
+* **Implementation Details**: API Route: [`api/src/server.ts`](./api/src/server.ts#L102-L189) · Frontend Helper: [`frontend/src/lib/stellar.ts`](./frontend/src/lib/stellar.ts#L45-L59).
+
+---
+
+## ⛓️ Deployed Smart Contracts (Stellar Testnet)
+
+| Contract | Explorer Link | Local Test Suite |
+|---|---|---|
+| **SoroShield Core Registry** | [`CCW2POI2YQXF4R4I7W7TQRO73UQX5H4YOWI5755TQB3VGME4QLJOGQ5B`](https://stellar.expert/explorer/testnet/contract/CCW2POI2YQXF4R4I7W7TQRO73UQX5H4YOWI5755TQB3VGME4QLJOGQ5B) | 3/3 ✅ *(Zero-fee, rolling limit, stats flow)* |
+
+---
+
+## 📸 Application Interface
+
+| Login Screen | Audit Workspace (Monaco Editor) |
+| :---: | :---: |
+| ![Login Page](PLACEHOLDER_SCREENSHOT_LOGIN) | ![Scan Workspace](PLACEHOLDER_SCREENSHOT_WORKSPACE) |
+| **Findings Panel** | **On-Chain Registry Directory** |
+| ![Scan Findings](PLACEHOLDER_SCREENSHOT_FINDINGS) | ![Public Registry Feed](PLACEHOLDER_SCREENSHOT_REGISTRY) |
+
+---
+
+## 🏗️ Architecture
+
+```mermaid
+flowchart TD
+    A["👤 Developer / Auditor"]
+    B["🌐 React Console Frontend\nFreighter wallet connector"]
+    C["⛽ /api/feebump\nFee-Bump Sponsor API"]
+    D["🔍 /api/scan\nScanner Rust CLI"]
+    E["⛓️ Soroban Smart Contract\ninitialize · mint_certificate · get_certificate"]
+    F["📊 Horizon Explorer API\nRegistry statistics"]
+
+    A --> B
+    B --> C & D & F
+    C & D --> E
+    E --> F
+
+    style A fill:#312e81,color:#c7d2fe,stroke:none
+    style B fill:#1d4ed8,color:#fff,stroke:none
+    style C fill:#581c87,color:#e9d5ff,stroke:none
+    style D fill:#0e7490,color:#cffafe,stroke:none
+    style E fill:#166534,color:#bbf7d0,stroke:none
+    style F fill:#b45309,color:#fef3c7,stroke:none
 ```
 
 ---
 
-## ⚙️ Installation & Local Setup
+## 🔄 Audit & Certification Lifecycle
 
-### Prerequisites
-* **Node.js** (v18+)
-* **Cargo & Rust** (for compiling scanner or building contracts)
-* **Freighter Wallet Extension** installed in your browser.
-
-### 1. Install Dependencies
-From the root project directory, run:
-```bash
-npm install
-npm run install:all
-```
-
-### 2. Configure Environment Variables
-Copy `.env.example` to `.env` in both the `/api` and `/frontend` folders:
-* **Backend API (`api/.env`)**: Set `FEE_BUMP_SECRET` to your funded sponsor secret key.
-* **React Frontend (`frontend/.env`)**: Set `VITE_CONTRACT_ID` to your deployed registry smart contract ID.
+| Step | Initiator | Action |
+| :---: | :--- | :--- |
+| 1️⃣ | **Developer** | Pastes Rust smart contract into Monaco Editor workspace |
+| 2️⃣ | **Express API** | Compiles code parsing CLI, runs Syn AST visitor engine, returns findings JSON |
+| 3️⃣ | **Developer** | Fixes issues, clicks **Mint Certificate** and connects Freighter Wallet |
+| 4️⃣ | **Frontend** | Simulates on-chain ledger footprint and constructs XDR envelope |
+| 5️⃣ | **Sponsor API** | Receives envelope, wraps inside a `FeeBumpTransaction` signed by sponsor key, and submits to Horizon |
+| 6️⃣ | **Registry** | Emits `CertificateMinted` event, locks hash, and updates global security stats |
 
 ---
 
-## 🏃 Running the Application
+## 🔒 Analyzer Security Rules
 
-To start the API backend and Vite React server concurrently:
-```bash
-npm run dev
-```
-* **Express Backend**: Listening on `http://localhost:3001`
-* **Vite React Console**: Open `http://localhost:5173`
-
----
-
-## 🧪 Step-by-Step Testing Guide
-
-### 1. Auth Login View
-* Open `http://localhost:5173/`.
-* Enter the credentials:
-  * **Username**: `admin`
-  * **Password**: `password`
-* Alternatively, click **Connect Wallet** in the login box or top header to connect your Freighter account (starts with `G...`).
-
-### 2. Run a Vulnerability Scan
-* In the left sidebar navigation, select **Audit Workspace**.
-* Paste your Rust contract code (or use the preloaded template showing vulnerabilities like missing auth checks and raw `+` arithmetic).
-* Click the blue **Scan Contract** button.
-* Renders 4 analysis findings: 1 Critical issue and 3 Warnings.
-
-### 3. Mint On-Chain Certificate
-* Connect your Freighter wallet and ensure the network dropdown in Freighter is set to **Testnet**.
-* Ensure your wallet is funded with Testnet XLM (use the [Stellar Laboratory Friendbot](https://laboratory.stellar.org/#account-creator?network=testnet) to fund your Freighter address).
-* Click **Mint Certificate**.
-* Click **Approve & Mint** in the modal.
-* Freighter will pop up a window. Approve the signature authorization.
-* **On Success**: Shows a checkmark, transaction hash link, and copies a direct registry verification URL (e.g. `/cert/<codeHash>`).
-
-### 4. Verify in Public Directory
-* Paste the contract code hash in the **On-Chain Registry** lookup page or check the **Public Scan Feed** table at the bottom of the page to inspect recently issued certificates.
-* The directory pulls details directly from the Stellar Testnet ledger!
+SoroShield scans for 10 core Soroban vulnerability classes:
+1. **Missing `require_auth`**: Public functions modifying state or moving funds without verifying signatures.
+2. **Unchecked Arithmetic Operators**: Usage of raw `+` or `-` operators that risk overflow or underflow.
+3. **Missing Input Validation**: Numerical parameters (fees, amounts) left unvalidated.
+4. **Unbounded Storage Collections**: Storage structures (Vec/Map) writing without size constraints.
+5. **Unprotected Contract Upgrade**: Function calling `update_current_contract_wasm` without authorization checks.
+6. **Missing Balance Verification**: Payout transfers executed without checking sufficiency balances.
+7. **Abrupt Panics**: Unhandled calls to `unwrap()`, `expect()`, or `panic!` macros.
+8. **Hardcoded Secrets**: Embedded private keys, secret seeds, or public addresses in source lines.
+9. **Missing Event Emissions**: State changes executed without emitting events.
+10. **Checks-Effects-Interactions (CEI)**: Reentrancy risks where storage state updates occur after external interactions.
 
 ---
 
-## 👥 User Onboarding & Feedback
-To continuously improve SoroShield, we are collecting feedback from early adopters:
-* **Google Feedback Form**: [Submit Feedback here](PLACEHOLDER_GOOGLE_FORM_URL)
-* **Exported User Responses**: [user_responses.xlsx](PLACEHOLDER_EXCEL_SHEET_URL)
+## 🛠️ Tech Stack
 
-### 📈 Future Improvements & Next Phase Evolution
-Based on early feedback, here is our roadmap for the next development phase:
-1. **Dynamic AST Visualizer**: Render a syntax tree path in the console to help developers trace down exactly where warnings are generated. Commit link: [f64b120](https://github.com/MrunalGhorpade13/SoroSheild-Stellar-/commit/f64b120)
-2. **Stellar Asset Contract Integration**: Automate vulnerability checks for interactions with native SAC tokens. Commit link: [ca865d7](https://github.com/MrunalGhorpade13/SoroSheild-Stellar-/commit/ca865d7)
-3. **Audit History Tracking**: Add search history caching to compare scan hashes over time. Commit link: [515d55e](https://github.com/MrunalGhorpade13/SoroSheild-Stellar-/commit/515d55e)
+| Layer | Technology |
+| :--- | :--- |
+| **Smart Contract** | Rust + Soroban SDK |
+| **Static Scanner** | Rust Crate (`syn` + `proc-macro2` AST visitors) |
+| **Frontend** | React 19 + Tailwind v4 + Monaco Editor Workspace |
+| **Backend API** | Node.js + Express + TypeScript |
+| **Blockchain** | Stellar Testnet (transitioning to Mainnet) |
+| **Network SDK** | `@stellar/stellar-sdk` & `@stellar/freighter-api` |
+| **Test Suites** | Cargo Test (contracts & scanner), Jest & Supertest (backend API) |
 
+---
+
+## ⬛ Level 6 — Black Belt Features
+
+| Feature | Status | Details |
+|---------|--------|---------|
+| ⛽ Fee Sponsorship (Gasless) | ✅ Live | FeeBump transactions via `/api/feebump` |
+| 📊 On-Chain Stats Monitoring | ✅ Live | Global cert count and scanned issues tracker via Horizon simulation |
+| 🛡️ Security Hardening | ✅ Done | Covered zero-fee minting and roll caps eviction tests |
+| 📝 User Onboarding Guide | ✅ Done | See [`docs/user_guide.md`](./docs/user_guide.md) |
+| 📐 Technical Docs | ✅ Done | See [`docs/technical_blog.md`](./docs/technical_blog.md) |
+| 🌐 Community Post | ✅ Done | Announcing SoroShield launch thread in [`docs/marketing_drafts.md`](./docs/marketing_drafts.md) |
+| 👥 Verified Users | ⏳ Pending | Awaiting 20+ Mainnet user onboarding feedback logs |
+
+---
+
+## 📚 Documentation Directory
+
+| Document | Description | Link |
+|----------|-------------|------|
+| 📖 **User Guide** | Walkthrough console login, scanning, and minting workflows | [Read Guide →](./docs/user_guide.md) |
+| 📐 **Technical Architecture** | In-depth breakdown of Syn AST visitor patterns and fee-bump layout | [Read Tech Post →](./docs/technical_blog.md) |
+| 🐦 **Outreach Threads** | Product launch announcement copy for LinkedIn/Twitter | [Read Marketing Drafts →](./docs/marketing_drafts.md) |
+| 🧪 **Task Tracking** | Level 6 checklists and progress trackers | [Read TODO.md →](./TODO.md) |
