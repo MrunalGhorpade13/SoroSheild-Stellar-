@@ -51,7 +51,7 @@ SoroShield utilizes Stellar's native **Fee-Bump Transactions** to deliver gasles
 
 | Contract | Explorer Link | Local Test Suite |
 |---|---|---|
-| **SoroShield Core Registry** | [`CCW2POI2YQXF4R4I7W7TQRO73UQX5H4YOWI5755TQB3VGME4QLJOGQ5B`](https://stellar.expert/explorer/testnet/contract/CCW2POI2YQXF4R4I7W7TQRO73UQX5H4YOWI5755TQB3VGME4QLJOGQ5B) | 3/3 ✅ *(Zero-fee, rolling limit, stats flow)* |
+| **SoroShield Core Registry** | [`CCLBUOFANQNQ26ACX3SOJG37MZDO2RGC7OCDWASZBUA6EFIQDASY2REM`](https://stellar.expert/explorer/testnet/contract/CCLBUOFANQNQ26ACX3SOJG37MZDO2RGC7OCDWASZBUA6EFIQDASY2REM) | 3/3 ✅ *(Zero-fee, rolling limit, stats flow)* |
 
 ---
 
