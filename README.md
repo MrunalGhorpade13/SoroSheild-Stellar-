@@ -138,7 +138,7 @@ To continuously improve SoroShield, we are collecting feedback from early adopte
 
 ### 📈 Future Improvements & Next Phase Evolution
 Based on early feedback, here is our roadmap for the next development phase:
-1. **Dynamic AST Visualizer**: Render a syntax tree path in the console to help developers trace down exactly where warnings are generated. Commit link: [git commit link](PLACEHOLDER_GIT_COMMIT_LINK_1)
-2. **Stellar Asset Contract Integration**: Automate vulnerability checks for interactions with native SAC tokens. Commit link: [git commit link](PLACEHOLDER_GIT_COMMIT_LINK_2)
-3. **Audit History Tracking**: Add search history caching to compare scan hashes over time. Commit link: [git commit link](PLACEHOLDER_GIT_COMMIT_LINK_3)
+1. **Dynamic AST Visualizer**: Render a syntax tree path in the console to help developers trace down exactly where warnings are generated. Commit link: [f64b120](https://github.com/MrunalGhorpade13/SoroSheild-Stellar-/commit/f64b120)
+2. **Stellar Asset Contract Integration**: Automate vulnerability checks for interactions with native SAC tokens. Commit link: [ca865d7](https://github.com/MrunalGhorpade13/SoroSheild-Stellar-/commit/ca865d7)
+3. **Audit History Tracking**: Add search history caching to compare scan hashes over time. Commit link: [515d55e](https://github.com/MrunalGhorpade13/SoroSheild-Stellar-/commit/515d55e)
 
