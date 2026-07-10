@@ -103,7 +103,7 @@ export const CertificateDirectory: React.FC<CertificateDirectoryProps> = ({ init
           <button
             type="submit"
             disabled={searching}
-            className="bg-stellar-blue text-white px-6 py-3 rounded-xl text-sm font-bold shadow-sm hover:bg-stellar-darkBlue active:scale-95 transition-all disabled:opacity-50 shrink-0"
+            className="bg-stellar-blue text-white px-6 py-3 rounded-xl text-sm font-bold shadow-sm hover:bg-stellar-dark-blue active:scale-95 transition-all disabled:opacity-50 shrink-0"
           >
             {searching ? 'Checking...' : 'Verify'}
           </button>
@@ -202,7 +202,7 @@ export const CertificateDirectory: React.FC<CertificateDirectoryProps> = ({ init
           </div>
           <button
             onClick={loadRecentCertificates}
-            className="text-xs font-semibold text-stellar-blue hover:text-stellar-darkBlue"
+            className="text-xs font-semibold text-stellar-blue hover:text-stellar-dark-blue"
           >
             Refresh Feed
           </button>
