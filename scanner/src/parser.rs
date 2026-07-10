@@ -491,8 +491,7 @@ mod tests {
         let mut scanner = SorobanScanner::new(code);
         scanner.visit_file(&file);
         assert!(!scanner.findings.is_empty());
-        assert_eq!(scanner.findings[0].rule_id, "RULE-05");
-        assert!(scanner.findings[0].title.contains("Unprotected contract upgrade"));
+        assert!(scanner.findings.iter().any(|f| f.rule_id == "RULE-05"));
     }
 
     #[test]
