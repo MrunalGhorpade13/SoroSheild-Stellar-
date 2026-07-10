@@ -238,7 +238,6 @@ impl<'a> SorobanScanner<'a> {
                     let is_val_type = input_names_to_check.iter().any(|&name| arg_name.to_lowercase().contains(name));
                     
                     if is_val_type {
-                        let mut finder_found = false;
                         struct ComparisonFinder {
                             target_var: String,
                             found: bool,
@@ -263,7 +262,7 @@ impl<'a> SorobanScanner<'a> {
                             found: false,
                         };
                         finder.visit_block(&method.block);
-                        finder_found = finder.found;
+                        let finder_found = finder.found;
 
                         if !finder_found {
                             self.findings.push(Finding {
