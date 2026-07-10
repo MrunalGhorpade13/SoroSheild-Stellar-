@@ -384,19 +384,19 @@ function App() {
 
   // Render Sidebar Layout
   return (
-    <div className="min-h-screen flex bg-slate-50 font-sans antialiased text-slate-800 animate-fade-in">
+    <div className="min-h-screen flex bg-[#F4F5F7] font-sans antialiased text-slate-800 animate-fade-in">
       
       {/* Left Sidebar Nav */}
-      <aside className="w-64 bg-slate-900 text-slate-400 flex flex-col justify-between shrink-0 border-r border-slate-800 relative z-30">
+      <aside className="w-64 bg-[#FAFAFA] text-slate-500 flex flex-col justify-between shrink-0 border-r border-slate-200/80 relative z-30">
         <div>
           {/* Logo */}
-          <div className="p-6 border-b border-slate-800 flex items-center gap-3 bg-slate-950/20">
+          <div className="p-6 border-b border-slate-200/60 flex items-center gap-3 bg-[#FFFFFF]">
             <div className="w-8 h-8 bg-stellar-blue text-white rounded-lg flex items-center justify-center">
               <Shield className="w-4.5 h-4.5 fill-current" />
             </div>
             <div>
-              <div className="text-sm font-bold !text-white tracking-tight leading-none">SoroShield</div>
-              <p className="text-[10px] text-slate-500 uppercase tracking-widest mt-1">Security Node</p>
+              <div className="text-sm font-bold text-slate-800 tracking-tight leading-none">SoroShield</div>
+              <p className="text-[10px] text-slate-400 uppercase tracking-widest mt-1">Security Node</p>
             </div>
           </div>
 
@@ -406,8 +406,8 @@ function App() {
               onClick={() => setActiveTab('dashboard')}
               className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
                 activeTab === 'dashboard'
-                  ? 'bg-slate-800 text-white shadow-sm font-bold'
-                  : 'hover:bg-slate-800/40 hover:text-slate-200'
+                  ? 'bg-stellar-blue/10 text-stellar-blue shadow-sm border border-stellar-blue/20 font-bold'
+                  : 'hover:bg-slate-200/40 hover:text-slate-700 text-slate-500'
               }`}
             >
               <LayoutDashboard className={`w-4.5 h-4.5 ${activeTab === 'dashboard' ? 'text-stellar-blue' : ''}`} />
@@ -418,8 +418,8 @@ function App() {
               onClick={() => setActiveTab('scan')}
               className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
                 activeTab === 'scan'
-                  ? 'bg-slate-800 text-white shadow-sm font-bold'
-                  : 'hover:bg-slate-800/40 hover:text-slate-200'
+                  ? 'bg-stellar-blue/10 text-stellar-blue shadow-sm border border-stellar-blue/20 font-bold'
+                  : 'hover:bg-slate-200/40 hover:text-slate-700 text-slate-500'
               }`}
             >
               <Terminal className={`w-4.5 h-4.5 ${activeTab === 'scan' ? 'text-stellar-blue' : ''}`} />
@@ -430,8 +430,8 @@ function App() {
               onClick={() => setActiveTab('registry')}
               className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
                 activeTab === 'registry'
-                  ? 'bg-slate-800 text-white shadow-sm font-bold'
-                  : 'hover:bg-slate-800/40 hover:text-slate-200'
+                  ? 'bg-stellar-blue/10 text-stellar-blue shadow-sm border border-stellar-blue/20 font-bold'
+                  : 'hover:bg-slate-200/40 hover:text-slate-700 text-slate-500'
               }`}
             >
               <FileBadge className={`w-4.5 h-4.5 ${activeTab === 'registry' ? 'text-stellar-blue' : ''}`} />
@@ -442,8 +442,8 @@ function App() {
               onClick={() => setActiveTab('guide')}
               className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
                 activeTab === 'guide'
-                  ? 'bg-slate-800 text-white shadow-sm font-bold'
-                  : 'hover:bg-slate-800/40 hover:text-slate-200'
+                  ? 'bg-stellar-blue/10 text-stellar-blue shadow-sm border border-stellar-blue/20 font-bold'
+                  : 'hover:bg-slate-200/40 hover:text-slate-700 text-slate-500'
               }`}
             >
               <BookOpen className={`w-4.5 h-4.5 ${activeTab === 'guide' ? 'text-stellar-blue' : ''}`} />
@@ -452,15 +452,15 @@ function App() {
           </nav>
         </div>
 
-        {/* User Card Profile & Logout */}
-        <div className="p-4 border-t border-slate-800 bg-slate-950/20 flex flex-col gap-3">
+        {/* User Profile & Logout */}
+        <div className="p-4 border-t border-slate-200/60 bg-[#FFFFFF] flex flex-col gap-3">
           <div className="flex items-center gap-2.5 px-2">
             <div className="w-8 h-8 rounded-full bg-stellar-blue/10 text-stellar-blue font-bold text-xs flex items-center justify-center border border-stellar-blue/30 uppercase">
               {currentUser ? currentUser.substring(0, 1) : 'A'}
             </div>
             <div>
-              <div className="text-xxs font-bold !text-slate-300 uppercase leading-none truncate max-w-[120px]">{currentUser || 'Admin'}</div>
-              <p className="text-[9px] text-slate-500 leading-none mt-1.5 truncate max-w-[120px]" title={walletAddress || undefined}>
+              <div className="text-xxs font-bold text-slate-700 uppercase leading-none truncate max-w-[120px]">{currentUser || 'Admin'}</div>
+              <p className="text-[9px] text-slate-400 leading-none mt-1.5 truncate max-w-[120px]" title={walletAddress || undefined}>
                 {walletAddress ? truncateAddress(walletAddress) : 'No Wallet Connected'}
               </p>
             </div>
@@ -468,7 +468,7 @@ function App() {
 
           <button
             onClick={handleLogout}
-            className="w-full flex items-center justify-center gap-2 py-2 px-3 bg-red-950/20 text-red-400 hover:bg-red-950/40 border border-red-900/30 rounded-xl text-xs font-semibold transition-all active:scale-98 cursor-pointer"
+            className="w-full flex items-center justify-center gap-2 py-2 px-3 bg-red-50 text-red-600 hover:bg-red-100 border border-red-200/60 rounded-xl text-xs font-semibold transition-all active:scale-98 cursor-pointer"
           >
             <LogOut className="w-4 h-4" />
             <span>Sign Out</span>
