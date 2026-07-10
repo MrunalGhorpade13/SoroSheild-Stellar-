@@ -516,5 +516,25 @@ mod tests {
         assert_eq!(scanner.findings[0].rule_id, "RULE-07");
         assert!(scanner.findings[0].title.contains("panic/unwrap/expect"));
     }
+
+    #[test]
+    fn test_visit_missing_input_validation() {
+        let code = "
+            struct Contract;
+            #[contractimpl]
+            impl Contract {
+                pub fn transfer(env: Env, to: Address, amount: i128) {
+                    let token_client = token::Client::new(&env, &to);
+                    token_client.transfer(&env.current_contract_address(), &to, &amount);
+                }
+            }
+        ";
+        let file = syn::parse_str::<syn::File>(code).unwrap();
+        let mut scanner = SorobanScanner::new(code);
+        scanner.visit_file(&file);
+        assert!(!scanner.findings.is_empty());
+        // Since transfer has amount which is not checked, it should trigger RULE-03
+        assert!(scanner.findings.iter().any(|f| f.rule_id == "RULE-03"));
+    }
 }
 
