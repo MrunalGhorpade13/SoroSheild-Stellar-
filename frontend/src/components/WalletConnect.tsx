@@ -113,7 +113,7 @@ export const WalletConnect: React.FC<WalletConnectProps> = ({ onWalletConnected,
     <button
       onClick={handleConnect}
       disabled={loading}
-      className="inline-flex items-center gap-2 bg-stellar-blue text-white px-5 py-2.5 rounded-xl text-sm font-semibold transition-all shadow-md hover:bg-stellar-darkBlue hover:shadow-lg active:scale-95 disabled:opacity-50"
+      className="inline-flex items-center gap-2 bg-stellar-blue text-white px-5 py-2.5 rounded-xl text-sm font-semibold transition-all shadow-md hover:bg-stellar-dark-blue hover:shadow-lg active:scale-95 disabled:opacity-50"
     >
       <Wallet className="w-4.5 h-4.5" />
       <span>{loading ? 'Connecting...' : 'Connect Wallet'}</span>
