@@ -290,4 +290,93 @@ mod test {
         // Assert authorization works and fee changes
         // (mock_all_auths takes care of verification)
     }
+
+    #[test]
+    fn test_zero_fee_mint() {
+        let env = Env::default();
+        env.mock_all_auths();
+
+        let admin = Address::generate(&env);
+        let treasury = Address::generate(&env);
+        let user = Address::generate(&env);
+
+        let token_admin = Address::generate(&env);
+        let token_contract_id = env.register_stellar_asset_contract(token_admin.clone());
+        let token_client = token::Client::new(&env, &token_contract_id);
+        let stellar_asset_client = token::StellarAssetClient::new(&env, &token_contract_id);
+
+        let initial_balance = 10_000_000_000i128;
+        stellar_asset_client.mint(&user, &initial_balance);
+
+        let contract_id = env.register_contract(None, SoroShieldContract);
+        let client = SoroShieldContractClient::new(&env, &contract_id);
+
+        // Initialize SoroShield with zero fee
+        client.initialize(&admin, &treasury, &token_contract_id, &0i128);
+
+        let mut hash_bytes = [0u8; 32];
+        hash_bytes[0] = 55;
+        let code_hash = BytesN::from_array(&env, &hash_bytes);
+
+        // Mint should succeed without transferring any token
+        client.mint_certificate(
+            &user,
+            &code_hash,
+            &0,
+            &0,
+            &0,
+            &Symbol::new(&env, "v1_0"),
+        );
+
+        assert_eq!(token_client.balance(&user), initial_balance);
+        assert_eq!(token_client.balance(&treasury), 0);
+    }
+
+    #[test]
+    fn test_rolling_limit_overflow() {
+        let env = Env::default();
+        env.mock_all_auths();
+
+        let admin = Address::generate(&env);
+        let treasury = Address::generate(&env);
+        let user = Address::generate(&env);
+
+        let token_admin = Address::generate(&env);
+        let token_contract_id = env.register_stellar_asset_contract(token_admin.clone());
+        let stellar_asset_client = token::StellarAssetClient::new(&env, &token_contract_id);
+
+        stellar_asset_client.mint(&user, &10_000_000_000i128);
+
+        let contract_id = env.register_contract(None, SoroShieldContract);
+        let client = SoroShieldContractClient::new(&env, &contract_id);
+
+        client.initialize(&admin, &treasury, &token_contract_id, &0i128);
+
+        // Mint 25 certificates
+        for i in 0..25 {
+            let mut hash_bytes = [0u8; 32];
+            hash_bytes[0] = i as u8;
+            let code_hash = BytesN::from_array(&env, &hash_bytes);
+
+            client.mint_certificate(
+                &user,
+                &code_hash,
+                &0,
+                &0,
+                &0,
+                &Symbol::new(&env, "v1_0"),
+            );
+        }
+
+        // Recent hashes count should cap at 20
+        let recent = client.list_recent_certificates(&50);
+        assert_eq!(recent.len(), 20);
+
+        // Oldest hash (0) should have been evicted, newest hash (24) should be present at index 0 (newest first)
+        let newest = recent.get(0).unwrap();
+        let mut expected_newest_hash = [0u8; 32];
+        expected_newest_hash[0] = 24;
+        assert_eq!(newest.code_hash, BytesN::from_array(&env, &expected_newest_hash));
+    }
 }
+
