@@ -51,7 +51,7 @@ export const ScanEditor: React.FC<ScanEditorProps> = ({ onScan, loading }) => {
   };
 
   return (
-    <div className="bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden flex flex-col h-[520px]">
+    <div className="bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden flex flex-col h-[520px] card-hover">
       {/* Editor Control Header */}
       <div className="flex items-center justify-between px-5 py-3.5 border-b border-slate-100 bg-slate-50/50">
         <div className="flex items-center gap-2">
