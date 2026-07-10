@@ -82,8 +82,8 @@ export const CertificateDirectory: React.FC<CertificateDirectoryProps> = ({ init
 
   return (
     <div className="space-y-8">
-      {/* 1. Search Bar */}
-      <div className="bg-white rounded-2xl border border-slate-100 p-6 shadow-sm">
+      {/* 1. Search Header Bar */}
+      <div className="bg-white rounded-2xl border border-slate-100 p-6 shadow-sm card-hover">
         <h3 className="text-base font-bold text-slate-800 mb-2">Verify Audit Certificate</h3>
         <p className="text-xs text-slate-400 mb-4 leading-relaxed">
           Paste the SHA-256 code hash of any Soroban smart contract to check if it was audited with SoroShield and inspect findings.
@@ -112,7 +112,7 @@ export const CertificateDirectory: React.FC<CertificateDirectoryProps> = ({ init
 
       {/* 2. Search Result Panel */}
       {hasSearched && (
-        <div className="bg-white rounded-2xl border border-slate-100 shadow-sm p-6 space-y-6">
+        <div className="bg-white rounded-2xl border border-slate-100 shadow-sm p-6 space-y-6 card-hover">
           <h3 className="text-sm font-bold text-slate-400 uppercase tracking-wider">Search Result</h3>
 
           {searching ? (
@@ -194,7 +194,7 @@ export const CertificateDirectory: React.FC<CertificateDirectoryProps> = ({ init
       )}
 
       {/* 3. Recent Feed */}
-      <div className="bg-white rounded-2xl border border-slate-100 shadow-sm p-6">
+      <div className="bg-white rounded-2xl border border-slate-100 shadow-sm p-6 card-hover">
         <div className="flex items-center justify-between mb-4 border-b border-slate-100 pb-3 shrink-0">
           <div className="flex items-center gap-2">
             <Database className="w-5 h-5 text-slate-400" />
