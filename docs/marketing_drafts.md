@@ -30,7 +30,7 @@ Developers, auditors, and users can instantly verify any contract's security his
 **Tweet 5: Check it out!**
 Check out SoroShield today! 
 💻 GitHub: [Insert GitHub Repo Link]
-📹 Demo Video: [Insert Video Link]
+📹 Demo Video: https://drive.google.com/file/d/1p9_nzpGyh71Ro-wI5ufkwCPlsVAqOvj7/view?usp=sharing
 📝 Google Form Feedback: [Insert Google Form Link]
 Let's make Soroban the safest place to build! 🌟
 

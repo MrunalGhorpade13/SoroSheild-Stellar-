@@ -19,4 +19,4 @@ Here is the tracking progress of SoroShield's Black Belt Level 6 requirements:
 - [ ] **Excel Sheet Link**: Embed exported user responses link in `README.md`.
 - [ ] **Final Mainnet Deploy**: Deploy the contract to mainnet and configure mainnet contract IDs inside `.env` variables using the provided launch scripts.
 - [ ] **Outreach Posting**: Publish the Twitter/X launch thread and tech blog post publicly.
-- [ ] **Demo Video**: Record and publish the product walkthrough video.
+- [x] **Demo Video**: Recorded and published. [▶️ Watch on Google Drive](https://drive.google.com/file/d/1p9_nzpGyh71Ro-wI5ufkwCPlsVAqOvj7/view?usp=sharing).

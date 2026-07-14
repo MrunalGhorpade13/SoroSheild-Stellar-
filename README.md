@@ -29,7 +29,7 @@ As the Stellar network embraces general-purpose smart contracts via Soroban, ens
 ## 🔗 Project Links
 
 * **Local Dev Console**: [http://localhost:5173/](http://localhost:5173/)
-* **Demo Video**: [Watch Demo Video](PLACEHOLDER_DEMO_VIDEO_URL)
+* **Demo Video**: [▶️ Watch Demo Video on Google Drive](https://drive.google.com/file/d/1p9_nzpGyh71Ro-wI5ufkwCPlsVAqOvj7/view?usp=sharing)
 * **Technical Blog Post**: [Read on Medium/Dev.to](./docs/technical_blog.md)
 * **Outreach Thread**: [LinkedIn/Twitter Launch thread](./docs/marketing_drafts.md)
 * **📋 User Feedback Form** *(Google Form)*: [Submit Feedback here](PLACEHOLDER_GOOGLE_FORM_URL)
