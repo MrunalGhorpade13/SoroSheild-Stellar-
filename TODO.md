@@ -15,8 +15,8 @@ Here is the tracking progress of SoroShield's Black Belt Level 6 requirements:
 - [x] **Mainnet Scripting**: Deployment and initialization helper scripts created in `contracts/soroshield/deploy_mainnet.sh` and `deploy_mainnet.ps1`.
 
 ## 🟡 Pending (Requires User Actions / Keys)
-- [ ] **Google Form Creation**: User feedback questionnaire collection.
-- [ ] **Excel Sheet Link**: Embed exported user responses link in `README.md`.
+- [x] **Google Form Creation**: User feedback questionnaire live. [📋 Open Form](https://docs.google.com/forms/d/e/1FAIpQLSeV7WxHX96y0U93hWPiMDP3Sajq5pDIs-eKYrrwRyg6lmJOCg/viewform?usp=header)
+- [x] **Excel Sheet Link**: Response sheet embedded in `README.md`. [📊 View Sheet](https://docs.google.com/spreadsheets/d/1C65NBPQMUXpTo2aRSNTJOjGeHMJH2m18SLtnt8RnjY0/edit?usp=sharing)
 - [ ] **Final Mainnet Deploy**: Deploy the contract to mainnet and configure mainnet contract IDs inside `.env` variables using the provided launch scripts.
 - [ ] **Outreach Posting**: Publish the Twitter/X launch thread and tech blog post publicly.
 - [x] **Demo Video**: Recorded and published. [▶️ Watch on Google Drive](https://drive.google.com/file/d/1p9_nzpGyh71Ro-wI5ufkwCPlsVAqOvj7/view?usp=sharing).

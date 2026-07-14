@@ -32,8 +32,8 @@ As the Stellar network embraces general-purpose smart contracts via Soroban, ens
 * **Demo Video**: [▶️ Watch Demo Video on Google Drive](https://drive.google.com/file/d/1p9_nzpGyh71Ro-wI5ufkwCPlsVAqOvj7/view?usp=sharing)
 * **Technical Blog Post**: [Read on Medium/Dev.to](./docs/technical_blog.md)
 * **Outreach Thread**: [LinkedIn/Twitter Launch thread](./docs/marketing_drafts.md)
-* **📋 User Feedback Form** *(Google Form)*: [Submit Feedback here](PLACEHOLDER_GOOGLE_FORM_URL)
-* **📊 Exported User Responses** *(Google Sheet / Excel)*: [user_responses.xlsx](PLACEHOLDER_EXCEL_SHEET_URL)
+* **📋 User Feedback Form** *(Google Form)*: [Submit Feedback Here](https://docs.google.com/forms/d/e/1FAIpQLSeV7WxHX96y0U93hWPiMDP3Sajq5pDIs-eKYrrwRyg6lmJOCg/viewform?usp=header)
+* **📊 Exported User Responses** *(Google Sheet)*: [View Responses Sheet](https://docs.google.com/spreadsheets/d/1C65NBPQMUXpTo2aRSNTJOjGeHMJH2m18SLtnt8RnjY0/edit?usp=sharing)
 
 ---
 
@@ -158,3 +158,24 @@ SoroShield scans for 10 core Soroban vulnerability classes:
 | 🐦 **Outreach Threads** | Product launch announcement copy for LinkedIn/Twitter | [Read Marketing Drafts →](./docs/marketing_drafts.md) |
 | 🛡️ **Security Review** | Detailed audit checklist and security vectors of the registry contract | [Read Review →](./docs/SECURITY_CHECKLIST.md) |
 | 🧪 **Task Tracking** | Level 6 checklists and progress trackers | [Read TODO.md →](./TODO.md) |
+
+---
+
+## 👥 User Feedback & Onboarding Responses
+
+> Collected via the [SoroShield Feedback Form](https://docs.google.com/forms/d/e/1FAIpQLSeV7WxHX96y0U93hWPiMDP3Sajq5pDIs-eKYrrwRyg6lmJOCg/viewform?usp=header). Full response sheet: [View on Google Sheets](https://docs.google.com/spreadsheets/d/1C65NBPQMUXpTo2aRSNTJOjGeHMJH2m18SLtnt8RnjY0/edit?usp=sharing).
+
+| # | Date | Full Name | Stellar Wallet | Rating | Feedback |
+|---|---|---|---|:---:|---|
+| 1 | 10 Jul 2026 | Yash Annadae | `GB6B6...FFTV` | ⭐⭐⭐⭐⭐ | Overall good! |
+| 2 | 10 Jul 2026 | Durvesh Dongare | `GBQXG...FSFW` | ⭐⭐⭐⭐⭐ | — |
+| 3 | 13 Jul 2026 | Madhura | `GB2GL...MMVS` | ⭐⭐⭐⭐⭐ | No suggestions |
+| 4 | 13 Jul 2026 | Rani | `GD3HN...S4TH` | ⭐⭐⭐⭐⭐ | Excellent UI |
+| 5 | 13 Jul 2026 | Anand | `GARB6...UBSQ` | ⭐⭐⭐⭐⭐ | No suggestion, very much user friendly |
+| 6 | 13 Jul 2026 | Ansh | `GAGKW...6FFX` | ⭐⭐⭐⭐⭐ | No |
+| 7 | 13 Jul 2026 | Anand | `GBEFD...SNNZ` | ⭐⭐⭐⭐⭐ | Excellent idea |
+| 8 | 13 Jul 2026 | Madhura | `GB2GL...MMVS` | ⭐⭐⭐⭐⭐ | Helpful application |
+| 9 | 13 Jul 2026 | Rani | `GD3HN...S4TH` | ⭐⭐⭐⭐⭐ | Helpful UI and user friendly |
+| 10 | 14 Jul 2026 | Ayush Gaikwad | `GBUDU...G5MG` | ⭐⭐⭐⭐⭐ | Very well working |
+
+**Total Responses: 10 &nbsp;|&nbsp; Average Rating: ⭐ 5.0 / 5 &nbsp;|&nbsp; 100% Satisfaction Rate**
