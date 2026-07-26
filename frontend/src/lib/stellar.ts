@@ -43,11 +43,14 @@ export async function getXLMBalance(address: string): Promise<string> {
 
 // Helper to sign transaction using Freighter
 export async function signTxWithFreighter(xdr: string): Promise<string> {
+  const network = STELLAR_NETWORK.toUpperCase() === 'MAINNET' || STELLAR_NETWORK.toUpperCase() === 'PUBLIC' 
+    ? "PUBLIC" 
+    : "TESTNET";
   const networkPassphrase = STELLAR_NETWORK.toUpperCase() === 'MAINNET' || STELLAR_NETWORK.toUpperCase() === 'PUBLIC' 
     ? Networks.PUBLIC 
     : Networks.TESTNET;
   
-  const result = await signTransaction(xdr, { networkPassphrase });
+  const result = await signTransaction(xdr, { network, networkPassphrase });
   
   if (result.error) {
     throw new Error(result.error);

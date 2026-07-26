@@ -134,24 +134,34 @@ export const FindingsList: React.FC<FindingsListProps> = ({
   return (
     <div className="bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden flex flex-col h-[520px]">
       {/* Findings Header */}
-      <div className="px-5 py-4 border-b border-slate-100 bg-slate-50/50 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 shrink-0">
-        <div>
-          <h3 className="font-bold text-slate-800 text-sm">Static Audit Summary</h3>
-          <p className="text-xs text-slate-400">Found {findings.length} points of interest</p>
-        </div>
-
-        {/* Badges and Mint Button */}
-        <div className="flex items-center gap-2">
-          {criticals > 0 && <span className="bg-red-100 text-red-800 text-xxs font-bold px-2 py-1 rounded">{criticals} Critical</span>}
-          {warnings > 0 && <span className="bg-amber-100 text-amber-800 text-xxs font-bold px-2 py-1 rounded">{warnings} Warning</span>}
-          {infos > 0 && <span className="bg-emerald-100 text-emerald-800 text-xxs font-bold px-2 py-1 rounded">{infos} Info</span>}
-
+      <div className="px-5 py-4 border-b border-slate-200/80 bg-[#FAFAFA] flex flex-col gap-3.5 shrink-0">
+        <div className="flex justify-between items-center gap-2">
+          <div>
+            <h3 className="font-bold text-slate-800 text-sm">Static Audit Summary</h3>
+            <p className="text-[11px] text-slate-400 mt-0.5 font-medium">Found {findings.length} issues in contract</p>
+          </div>
           <button
             onClick={onMintClick}
-            className="ml-2 bg-stellar-blue text-white font-bold text-xs px-3.5 py-1.5 rounded-lg hover:bg-stellar-dark-blue transition-all shrink-0 active:scale-95 shadow-sm"
+            className="bg-stellar-blue text-white font-bold text-xs px-3.5 py-2 rounded-xl hover:bg-stellar-dark-blue transition-all active:scale-95 shadow-sm flex items-center shrink-0"
           >
             Mint Certificate
           </button>
+        </div>
+
+        {/* Severity Metrics Row */}
+        <div className="grid grid-cols-3 gap-2">
+          <div className="bg-red-50/50 border border-red-100 rounded-xl py-1.5 px-2 flex items-center justify-between gap-1">
+            <span className="text-[10px] font-bold text-red-500 uppercase tracking-wide">Critical</span>
+            <span className="text-xs font-extrabold text-red-700 bg-red-100/80 w-5.5 h-5.5 rounded-lg flex items-center justify-center shrink-0">{criticals}</span>
+          </div>
+          <div className="bg-amber-50/50 border border-amber-100 rounded-xl py-1.5 px-2 flex items-center justify-between gap-1">
+            <span className="text-[10px] font-bold text-amber-600 uppercase tracking-wide">Warning</span>
+            <span className="text-xs font-extrabold text-amber-700 bg-amber-100/80 w-5.5 h-5.5 rounded-lg flex items-center justify-center shrink-0">{warnings}</span>
+          </div>
+          <div className="bg-emerald-50/50 border border-emerald-100 rounded-xl py-1.5 px-2 flex items-center justify-between gap-1">
+            <span className="text-[10px] font-bold text-emerald-600 uppercase tracking-wide">Info</span>
+            <span className="text-xs font-extrabold text-emerald-700 bg-emerald-100/80 w-5.5 h-5.5 rounded-lg flex items-center justify-center shrink-0">{infos}</span>
+          </div>
         </div>
       </div>
 
