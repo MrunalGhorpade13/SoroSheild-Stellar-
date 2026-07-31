@@ -57,11 +57,13 @@ SoroShield utilizes Stellar's native **Fee-Bump Transactions** to deliver gasles
 
 ## 📸 Application Interface
 
-| Login Screen | Audit Workspace (Monaco Editor) |
+| Login / Auth Screen | Overview Dashboard |
 | :---: | :---: |
-| ![Login Page](PLACEHOLDER_SCREENSHOT_LOGIN) | ![Scan Workspace](PLACEHOLDER_SCREENSHOT_WORKSPACE) |
-| **Findings Panel** | **On-Chain Registry Directory** |
-| ![Scan Findings](PLACEHOLDER_SCREENSHOT_FINDINGS) | ![Public Registry Feed](PLACEHOLDER_SCREENSHOT_REGISTRY) |
+| ![Login Page](./docs/screenshots/screenshot_login.png) | ![Overview Dashboard](./docs/screenshots/screenshot_dashboard.png) |
+| **Audit Workspace (Monaco Editor)** | **On-Chain Registry Directory** |
+| ![Audit Workspace](./docs/screenshots/screenshot_workspace.png) | ![On-Chain Registry](./docs/screenshots/screenshot_registry.png) |
+| **Security Guide** | |
+| ![Security Guide](./docs/screenshots/screenshot_guide.png) | |
 
 ---
 
