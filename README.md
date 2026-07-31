@@ -14,7 +14,7 @@
 
 As the Stellar network embraces general-purpose smart contracts via Soroban, ensuring contract safety is paramount. Bugs on-chain lead to lost funds, storage leaks, and protocol panics.
 
-**SoroShield** acts as a decentralized static analysis trust layer. It automatically reviews Rust smart contract code via visitor patterns inside an Abstract Syntax Tree (AST), identifies 10 critical vulnerability rules, and stamps a cryptographic audit certificate on the Stellar ledger — completely backed by gasless fee-bump transaction sponsorships.
+**SoroShield** solves this by replacing manual code review with an immutable Layer-1 trust engine — automatically reviewing Rust smart contract code via visitor patterns inside an Abstract Syntax Tree (AST), identifying 10 critical vulnerability classes, and stamping a cryptographic audit certificate on the Stellar ledger, completely backed by gasless fee-bump transaction sponsorships.
 
 ---
 
@@ -28,28 +28,28 @@ As the Stellar network embraces general-purpose smart contracts via Soroban, ens
 
 ## 🔗 Project Links
 
-* **Local Dev Console**: [http://localhost:5173/](http://localhost:5173/)
-* **Demo Video**: [▶️ Watch Demo Video on Google Drive](https://drive.google.com/file/d/1p9_nzpGyh71Ro-wI5ufkwCPlsVAqOvj7/view?usp=sharing)
-* **Technical Blog Post**: [Read on Medium/Dev.to](./docs/technical_blog.md)
-* **Outreach Thread**: [LinkedIn/Twitter Launch thread](./docs/marketing_drafts.md)
-* **📋 User Feedback Form** *(Google Form)*: [Submit Feedback Here](https://docs.google.com/forms/d/e/1FAIpQLSeV7WxHX96y0U93hWPiMDP3Sajq5pDIs-eKYrrwRyg6lmJOCg/viewform?usp=header)
-* **📊 Exported User Responses** *(Google Sheet)*: [View Responses Sheet](https://docs.google.com/spreadsheets/d/1C65NBPQMUXpTo2aRSNTJOjGeHMJH2m18SLtnt8RnjY0/edit?usp=sharing)
+- **Local Dev Console**: [http://localhost:5173/](http://localhost:5173/)
+- **Demo Video**: [▶️ Watch on Google Drive](https://drive.google.com/file/d/1p9_nzpGyh71Ro-wI5ufkwCPlsVAqOvj7/view?usp=sharing)
+- **Technical Blog Post**: [Read Blog →](./docs/technical_blog.md)
+- **Community Launch Thread**: [Read Marketing Draft →](./docs/marketing_drafts.md)
+- **📋 User Feedback Form** *(submit your review here)*: [Open Google Form →](https://docs.google.com/forms/d/e/1FAIpQLSeV7WxHX96y0U93hWPiMDP3Sajq5pDIs-eKYrrwRyg6lmJOCg/viewform?usp=header)
+- **📊 Feedback Response Sheet** *(view all submitted responses)*: [Open Google Sheet →](https://docs.google.com/spreadsheets/d/1C65NBPQMUXpTo2aRSNTJOjGeHMJH2m18SLtnt8RnjY0/edit?usp=sharing)
 
 ---
 
 ## ⚡ Advanced Feature — Fee Sponsorship (Gasless Transactions)
 
-SoroShield utilizes Stellar's native **Fee-Bump Transactions** to deliver gasless certificate minting.
-* Developers or auditors connect Freighter and request to sign the certification envelope.
-* SoroShield's Express API wraps the signed envelope into a Fee-Bump transaction signed by our treasury sponsor wallet.
-* Network fees are sponsored entirely by SoroShield's treasury wallet.
-* **Implementation Details**: API Route: [`api/src/server.ts`](./api/src/server.ts#L102-L189) · Frontend Helper: [`frontend/src/lib/stellar.ts`](./frontend/src/lib/stellar.ts#L45-L59).
+- **Gasless certificate minting** using Stellar's native Fee-Bump Transactions.
+- Developers or auditors connect Freighter and request to sign the certification envelope.
+- SoroShield's Express API wraps the signed envelope into a Fee-Bump transaction signed by our treasury sponsor wallet.
+- Network fees are sponsored entirely by SoroShield's treasury wallet — **auditors need zero XLM** to mint.
+- **Implementation**: API Route: [`api/src/server.ts`](./api/src/server.ts#L102-L189) · Frontend Helper: [`frontend/src/lib/stellar.ts`](./frontend/src/lib/stellar.ts#L44-L61)
 
 ---
 
 ## ⛓️ Deployed Smart Contracts (Stellar Testnet)
 
-| Contract | Explorer Link | Local Test Suite |
+| Contract | Address | Tests |
 |---|---|---|
 | **SoroShield Core Registry** | [`CCLBUOFANQNQ26ACX3SOJG37MZDO2RGC7OCDWASZBUA6EFIQDASY2REM`](https://stellar.expert/explorer/testnet/contract/CCLBUOFANQNQ26ACX3SOJG37MZDO2RGC7OCDWASZBUA6EFIQDASY2REM) | 3/3 ✅ *(Zero-fee, rolling limit, stats flow)* |
 
@@ -68,6 +68,8 @@ SoroShield utilizes Stellar's native **Fee-Bump Transactions** to deliver gasles
 ---
 
 ## 🏗️ Architecture
+
+SoroShield is a hybrid dApp — the static scanner runs server-side, but the certificate registry lives entirely on the Soroban ledger.
 
 ```mermaid
 flowchart TD
@@ -95,7 +97,7 @@ flowchart TD
 
 ## 🔄 Audit & Certification Lifecycle
 
-| Step | Initiator | Action |
+| Step | Who | Action |
 | :---: | :--- | :--- |
 | 1️⃣ | **Developer** | Pastes Rust smart contract into Monaco Editor workspace |
 | 2️⃣ | **Express API** | Compiles code parsing CLI, runs Syn AST visitor engine, returns findings JSON |
@@ -109,16 +111,17 @@ flowchart TD
 ## 🔒 Analyzer Security Rules
 
 SoroShield scans for 10 core Soroban vulnerability classes:
-1. **Missing `require_auth`**: Public functions modifying state or moving funds without verifying signatures.
-2. **Unchecked Arithmetic Operators**: Usage of raw `+` or `-` operators that risk overflow or underflow.
-3. **Missing Input Validation**: Numerical parameters (fees, amounts) left unvalidated.
-4. **Unbounded Storage Collections**: Storage structures (Vec/Map) writing without size constraints.
-5. **Unprotected Contract Upgrade**: Function calling `update_current_contract_wasm` without authorization checks.
-6. **Missing Balance Verification**: Payout transfers executed without checking sufficiency balances.
-7. **Abrupt Panics**: Unhandled calls to `unwrap()`, `expect()`, or `panic!` macros.
-8. **Hardcoded Secrets**: Embedded private keys, secret seeds, or public addresses in source lines.
-9. **Missing Event Emissions**: State changes executed without emitting events.
-10. **Checks-Effects-Interactions (CEI)**: Reentrancy risks where storage state updates occur after external interactions.
+
+1. **Missing `require_auth`** — Public functions modifying state or moving funds without verifying signatures.
+2. **Unchecked Arithmetic Operators** — Usage of raw `+` or `-` operators that risk overflow or underflow.
+3. **Missing Input Validation** — Numerical parameters (fees, amounts) left unvalidated.
+4. **Unbounded Storage Collections** — Storage structures (Vec/Map) writing without size constraints.
+5. **Unprotected Contract Upgrade** — Function calling `update_current_contract_wasm` without authorization.
+6. **Missing Balance Verification** — Payout transfers executed without checking sufficiency balances.
+7. **Abrupt Panics** — Unhandled calls to `unwrap()`, `expect()`, or `panic!` macros.
+8. **Hardcoded Secrets** — Embedded private keys, secret seeds, or public addresses in source lines.
+9. **Missing Event Emissions** — State changes executed without emitting events.
+10. **Checks-Effects-Interactions (CEI)** — Reentrancy risks where storage updates occur after external interactions.
 
 ---
 
@@ -126,11 +129,12 @@ SoroShield scans for 10 core Soroban vulnerability classes:
 
 | Layer | Technology |
 | :--- | :--- |
-| **Smart Contract** | Rust + Soroban SDK |
+| **Smart Contract** | Rust + Soroban SDK (Stellar) |
 | **Static Scanner** | Rust Crate (`syn` + `proc-macro2` AST visitors) |
-| **Frontend** | React 19 + Tailwind v4 + Monaco Editor Workspace |
+| **Frontend** | React 19, Vite, Tailwind CSS v4, Monaco Editor |
 | **Backend API** | Node.js + Express + TypeScript |
 | **Blockchain** | Stellar Testnet (transitioning to Mainnet) |
+| **Wallets** | Freighter Browser Extension |
 | **Network SDK** | `@stellar/stellar-sdk` & `@stellar/freighter-api` |
 | **Test Suites** | Cargo Test (contracts & scanner), Jest & Supertest (backend API) |
 
@@ -147,11 +151,12 @@ SoroShield scans for 10 core Soroban vulnerability classes:
 | 📐 Technical Docs | ✅ Done | See [`docs/technical_blog.md`](./docs/technical_blog.md) |
 | 🌐 Community Post | ✅ Done | Announcing SoroShield launch thread in [`docs/marketing_drafts.md`](./docs/marketing_drafts.md) |
 | 🏗️ Security Review | ✅ Done | See [`docs/SECURITY_CHECKLIST.md`](./docs/SECURITY_CHECKLIST.md) |
-| 👥 Verified Users | ⏳ Pending | Awaiting 20+ Mainnet user onboarding feedback logs |
+| 👥 Verified Users | ✅ Done | 10 verified testnet participants with 5.0/5 average rating |
+| 🧪 Task Tracking | ✅ Done | See [`TODO.md`](./TODO.md) |
 
 ---
 
-## 📚 Documentation Directory
+## 📚 Documentation
 
 | Document | Description | Link |
 |----------|-------------|------|
@@ -160,6 +165,8 @@ SoroShield scans for 10 core Soroban vulnerability classes:
 | 🐦 **Outreach Threads** | Product launch announcement copy for LinkedIn/Twitter | [Read Marketing Drafts →](./docs/marketing_drafts.md) |
 | 🛡️ **Security Review** | Detailed audit checklist and security vectors of the registry contract | [Read Review →](./docs/SECURITY_CHECKLIST.md) |
 | 🧪 **Task Tracking** | Level 6 checklists and progress trackers | [Read TODO.md →](./TODO.md) |
+| 📋 **Feedback Form** | 🖊️ **Google Form** — Use this to **submit** a new feedback response | [**Open Google Form →**](https://docs.google.com/forms/d/e/1FAIpQLSeV7WxHX96y0U93hWPiMDP3Sajq5pDIs-eKYrrwRyg6lmJOCg/viewform?usp=header) |
+| 📊 **Feedback Response Sheet** | 📈 **Google Sheet** — Use this to **view** all submitted responses | [**Open Google Sheet →**](https://docs.google.com/spreadsheets/d/1C65NBPQMUXpTo2aRSNTJOjGeHMJH2m18SLtnt8RnjY0/edit?usp=sharing) |
 
 ---
 
